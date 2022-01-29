@@ -83,6 +83,7 @@ public class ShipServerConnectionThread extends Thread {
             switch (shipServerResponse.split(" -> ")[0]) {
                 case "registered" -> {
                     setId(Integer.parseInt(shipServerResponse.split(" -> ")[1].split(Pattern.quote(" | "))[0]));
+                    System.out.println(shipServerResponse);
                     setHarbour(shipServerResponse.split(" -> ")[1].split(Pattern.quote(" | "))[1]);
                     setCompany(shipServerResponse.split(" -> ")[1].split(Pattern.quote(" | "))[2]);
 
