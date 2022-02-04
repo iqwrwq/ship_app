@@ -98,11 +98,7 @@ public class ShipServerConnectionThread extends Thread {
                     seaTradeServerConnectionThread.printWriter.println("moveto:" + shipServerResponse.split(Pattern.quote(" -> "))[1]);
                 }
                 case "load" -> {
-                    if (shipServerResponse.split(" ").length >= 2) {
-                        seaTradeServerConnectionThread.printWriter.println("loadcargo:" + shipServerResponse.split(" ")[1]);
-                    } else {
-                        seaTradeServerConnectionThread.printWriter.println("loadcargo");
-                    }
+                    seaTradeServerConnectionThread.printWriter.println("loadcargo");
                 }
                 case "ping" -> {
                     System.out.println("pinged");

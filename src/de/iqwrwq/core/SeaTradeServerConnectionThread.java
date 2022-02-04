@@ -51,9 +51,6 @@ public class SeaTradeServerConnectionThread extends Thread {
                         }
                         case "error" -> {
                             shipServerConnectionThread.printWriter.println(seaTradeResponse);
-                            if (seaTradeResponse.split(Pattern.quote(":")).length >= 3) {
-                                shipServerConnectionThread.printWriter.println("reach " + seaTradeResponse.split(Pattern.quote(":"))[1]);
-                            }
                         }
                         default -> {
                             System.out.println(seaTradeResponse);
