@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact name="ShipApp:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/ShipApp_jar</output-path>
+  <artifact build-on-make="true" name="ShipApp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ShipApp</output-path>
     <root id="root">
       <element id="archive" name="ShipApp.jar">
         <element id="module-output" name="ShipApp" />
