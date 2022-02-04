@@ -104,6 +104,10 @@ public class ShipServerConnectionThread extends Thread {
                         seaTradeServerConnectionThread.printWriter.println("loadcargo");
                     }
                 }
+                case "ping" -> {
+                    System.out.println("pinged");
+                    printWriter.println("active");
+                }
                 case "unload" -> {
                     seaTradeServerConnectionThread.printWriter.println("unloadcargo");
                 }
