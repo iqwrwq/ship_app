@@ -44,19 +44,19 @@ public class SeaTradeServerConnectionThread extends Thread {
                         }
                         case "unloaded" -> {
                             shipServerConnectionThread.chargeCompany(Integer.parseInt(seaTradeResponse.split(Pattern.quote(":"))[1]));
+                            shipServerConnectionThread.printWriter.println("unload");
                         }
                         case "reached" -> {
-                            if (seaTradeResponse.split(Pattern.quote(":"))[1].equals(shipServerConnectionThread.cargo.destination)) {
-                                shipServerConnectionThread.printWriter.println(shipServerConnectionThread.cargo.id + " ->  ReadyToUnloadCargo");
-                            }
+                            shipServerConnectionThread.printWriter.println("reach -> " + seaTradeResponse.split(Pattern.quote(":"))[1]);
                         }
                         case "error" -> {
+                            shipServerConnectionThread.printWriter.println(seaTradeResponse);
                             if (seaTradeResponse.split(Pattern.quote(":")).length >= 3){
                                 shipServerConnectionThread.printWriter.println(seaTradeResponse.split(Pattern.quote(":"))[1] + "Error");
                             }
                         }
                         default -> {
-
+                            System.out.println(seaTradeResponse);
                         }
                     }
 
