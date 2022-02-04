@@ -12,7 +12,6 @@ public class Kernel {
 
 
     public Kernel(){
-        System.out.println("aa");
         this.config = new Config("config/config.properties");
         this.shipServerConnectionThread = new ShipServerConnectionThread(config);
     }
