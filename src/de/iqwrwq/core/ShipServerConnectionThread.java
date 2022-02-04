@@ -41,17 +41,7 @@ public class ShipServerConnectionThread extends Thread {
             try (Socket shipServerSocket = connectShipToShipServer()) {
                 registerToShipServer(shipServerSocket);
                 communicateWithShipServer(shipServerSocket);
-            } catch (IOException e) {
-                try {
-                    System.out.println("Ship -> Error -> ConnectionError |  " + config.host + " | " + config.shipServerPort);
-                    System.out.println("Ship -> Reconnect");
-                    sleep(10000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-
-            }
-            System.out.println("Ship -> ConnectionTimeout");
+            } catch (IOException ignored) {}
         }
     }
 
@@ -115,6 +105,7 @@ public class ShipServerConnectionThread extends Thread {
                     }
                 }
                 case "removed" -> {
+                    seaTradeServerConnectionThread.exit();
                     shipServerSocket.close();
                     System.out.println("Ship -> closing | ServerClosed");
                 }

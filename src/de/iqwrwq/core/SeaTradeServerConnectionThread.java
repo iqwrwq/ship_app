@@ -12,6 +12,7 @@ public class SeaTradeServerConnectionThread extends Thread {
     public PrintWriter printWriter;
     private Config config;
     private ShipServerConnectionThread shipServerConnectionThread;
+    private Socket socket;
 
     public SeaTradeServerConnectionThread(Config config, ShipServerConnectionThread shipServerConnectionThread) {
         this.config = config;
@@ -20,13 +21,14 @@ public class SeaTradeServerConnectionThread extends Thread {
 
     @Override
     public void run() {
-        try (Socket socket = new Socket(config.host, config.seaTradeServerPort)) {
+        try  {
+            this.socket = new Socket(config.host, config.seaTradeServerPort);
             this.printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.println("launch:" + shipServerConnectionThread.company + ":" + shipServerConnectionThread.harbour + ":Ship" + shipServerConnectionThread.id + (int) (Math.random() * (999 - 1 + 1) + 1));
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             String seaTradeResponse;
-            while (socket.isConnected()) {
+            while (!socket.isClosed()) {
                 while (bufferedReader.ready()) {
                     seaTradeResponse = bufferedReader.readLine();
                     System.out.println("SeaTrade -> " + seaTradeResponse);
@@ -62,6 +64,15 @@ public class SeaTradeServerConnectionThread extends Thread {
             }
         } catch (IOException e) {
             System.out.println("Cannot Connect to " + config.host + "with port " + config.seaTradeServerPort);
+            e.printStackTrace();
+        }
+    }
+
+    public void exit(){
+        try {
+            printWriter.println("exit");
+            this.socket.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
