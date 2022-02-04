@@ -47,29 +47,22 @@ public class SeaTradeServerConnectionThread extends Thread {
                             shipServerConnectionThread.printWriter.println("unload");
                         }
                         case "reached" -> {
-<<<<<<< HEAD
                             shipServerConnectionThread.printWriter.println("reach -> " + seaTradeResponse.split(Pattern.quote(":"))[1]);
                         }
                         case "error" -> {
                             shipServerConnectionThread.printWriter.println(seaTradeResponse);
-                            if (seaTradeResponse.split(Pattern.quote(":")).length >= 3){
-=======
-                            shipServerConnectionThread.printWriter.println("reach " + seaTradeResponse.split(Pattern.quote(":"))[1]);
-                        }
-                        case "error" -> {
                             if (seaTradeResponse.split(Pattern.quote(":")).length >= 3) {
->>>>>>> 0697cd27911c172f5fed9b8ab95ab055bb2ff002
-                                shipServerConnectionThread.printWriter.println(seaTradeResponse.split(Pattern.quote(":"))[1] + "Error");
+                                shipServerConnectionThread.printWriter.println("reach " + seaTradeResponse.split(Pattern.quote(":"))[1]);
                             }
                         }
                         default -> {
                             System.out.println(seaTradeResponse);
                         }
-                    }
 
+
+                    }
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Cannot Connect to " + config.host + "with port " + config.seaTradeServerPort);
             e.printStackTrace();
